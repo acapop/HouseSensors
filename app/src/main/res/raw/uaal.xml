@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application>
+    <permissions>
+        <mw.bus.service>
+        </mw.bus.service>
+        <mw.bus.context>
+            <advertisement>
+                <title>Measured temperature</title>
+                <description>This is a CONTEXT PUBLISHER EVENT: New measured tempeture</description>
+                <action>es.upv.TEMPERATUREP_EVENT</action>
+                <category>android.intent.category.DEFAULT</category>
+                <remote>true</remote>
+                <input>
+                    <key>var1</key>
+                    <value>sender</value>
+                </input>
+                <input>
+                    <key>var2</key>
+                    <value>type</value>
+                </input>
+                <input>
+                    <key>var3</key>
+                    <value>value</value>
+                </input>
+                <serialization>
+                    <![CDATA[
+@prefix ns: <http://ontology.universaal.org/PhThing.owl#> .
+@prefix ns1: <http://ontology.universAAL.org/Context.owl#> .
+@prefix ns2: <http://ontology.universaal.org/Measurement.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ns3: <http://ontology.universaal.org/HealthMeasurement.owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ns4: <http://ontology.universAAL.org/Device.owl#> .
+@prefix : <http://ontology.universAAL.org/Test.owl#> .
+<urn:org.universAAL.middleware.context.rdf:ContextEvent#_:9e2aa729ac420ba3:171d>
+ns1:hasProvider :testpub ;
+  a ns1:ContextEvent ;
+  rdf:subject :&var1;sensor&var1; ;
+  ns1:hasTimestamp "1418143637251"^^xsd:long ;
+  rdf:predicate ns4:hasValue ;
+  rdf:object :&var2;bp&var2; .
+ns1:gauge a ns1:ContextProviderType .
+:&var1;sensor&var1; a <http://ontology.universAAL.org/PersonalHealthDevice.owl#BloodOxygenSatSensor> ,
+    ns:Device ,
+    ns:PhysicalThing ;
+  ns4:hasValue :&var2;bp&var2; .
+:testpub a ns1:ContextProvider ;
+  ns1:hasType ns1:gauge ;
+  ns1:myClassesOfEvents [
+      a ns1:ContextEventPattern ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf> [
+          a owl:Restriction ;
+          owl:allValuesFrom <http://ontology.universAAL.org/PersonalHealthDevice.owl#BloodOxygenSatSensor> ;
+          owl:onProperty rdf:subject
+        ]
+    ] .
+:&var2;bp&var2; ns2:value "&var3;11.1&var3;"^^xsd:float ;
+  a ns3:BloodOxygenSaturation ,
+    ns3:HealthMeasurement .
+]]>
+                </serialization>
+            </advertisement>
+        </mw.bus.context>
+    </permissions>
+</application>

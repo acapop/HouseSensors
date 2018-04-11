@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">House Sensors</string>
+    <string name="temp_hint">Temp</string>
+</resources>
